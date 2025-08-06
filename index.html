@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikimori.one - Сообщество любителей аниме</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a55fa;
+            --secondary: #ff6b6b;
+            --dark: #2d3047;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --text: #495057;
+            --accent: #4cc9f0;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-family: 'Comfortaa', cursive;
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: url('https://images.unsplash.com/photo-1541562232579-512a21360020?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80') center/cover no-repeat;
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(106, 85, 250, 0.85), rgba(76, 201, 240, 0.85));
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 107, 107, 0.6);
+            background: #ff5252;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* How to Section */
+        .how-to {
+            padding: 100px 0;
+            background-color: var(--gray);
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step h3 {
+            margin: 15px 0;
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                padding: 30px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                gap: 25px;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-dragon"></i></div>
+                <div class="logo-text">ShikiAkri.one</div>
+            </a>
+            
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link">Главная</a>
+                <a href="#features" class="nav-link">Возможности</a>
+                <a href="#how-to" class="nav-link">Как начать</a>
+                <a href="#community" class="nav-link">Сообщество</a>
+                <a href="#" class="nav-link">Войти</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="animated">Ваш гид в мире аниме</h1>
+            <p class="animated delay-1">Присоединяйтесь к крупнейшему русскоязычному сообществу любителей аниме. Отслеживайте просмотренное, обсуждайте новинки, находите единомышленников.</p>
+            <a href="https://shikimori.one/" class="cta-button animated delay-2">Присоединиться сейчас</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Почему Shikimori.one?</h2>
+                <p>Разработчик Morr разработал эту лучшую платформу для настоящих ценителей аниме</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card animated delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Каталог аниме</h3>
+                    <p>База из 50,000+ аниме с детальной информацией, рейтингами и отзывами</p>
+                </div>
+                
+                <div class="feature-card animated delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Сообщество</h3>
+                    <p>Общайтесь с единомышленниками, делитесь впечатлениями и находите друзей</p>
+                </div>
+                
+                <div class="feature-card animated delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Планирование</h3>
+                    <p>Отмечайте просмотренное, составляйте списки и следите за расписанием релизов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animated">
+                    <h3>500K+</h3>
+                    <p>Пользователей</p>
+                </div>
+                
+                <div class="stat-item animated delay-1">
+                    <h3>50K+</h3>
+                    <p>Аниме в базе</p>
+                </div>
+                
+                <div class="stat-item animated delay-2">
+                    <h3>10M+</h3>
+                    <p>Обсуждений</p>
+                </div>
+                
+                <div class="stat-item animated delay-3">
+                    <h3>24/7</h3>
+                    <p>Активное сообщество</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Section -->
+    <section class="how-to" id="how-to">
+        <div class="container">
+            <div class="section-title animated">
+                <h2>Как начать?</h2>
+                <p>Присоединиться к сообществу Shikimori.one очень просто</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step animated">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-user-plus" style="font-size: 50px; color: var(--primary);"></i>
+                    <h3>Регистрация</h3>
+                    <p>Создайте аккаунт через email или социальные сети</p>
+                </div>
+                
+                <div class="step animated delay-1">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-heart" style="font-size: 50px; color: var(--secondary);"></i>
+                    <h3>Выбор аниме</h3>
+                    <p>Добавьте в список просмотренное и планируемое аниме</p>
+                </div>
+                
+                <div class="step animated delay-2">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-comments" style="font-size: 50px; color: var(--accent);"></i>
+                    <h3>Общение</h3>
+                    <p>Присоединяйтесь к обсуждениям и находите друзей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="#" class="logo" style="margin-bottom: 20px;">
+                        <div class="logo-icon"><i class="fas fa-dragon"></i></div>
+                        <div class="logo-text">Shikimori.one</div>
+                    </a>
+                    <p style="color: #adb5bd; margin-bottom: 20px;">Крупнейшее русскоязычное сообщество любителей аниме</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="https://t.me/obitelakri"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-Shikimori"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#features">Возможности</a></li>
+                        <li><a href="#how-to">Как начать</a></li>
+                        <li><a href="#community">Сообщество</a></li>
+                        <li><a href="#">Форум</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ресурсы</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://shikimori.one/animes">База аниме</a></li>
+                        <li><a href="https://shikimori.one/animes/status/ongoing">Календарь релизов</a></li>
+                        <li><a href="https://shikimori.one/forum/news">Форум новостей</a></li>
+                        <li><a href="https://shikimori.one/ranobe">Ранобэ</a></li>
+                        <li><a href="https://shikimori.one/mangas">Манга</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li><a   href="https://akrifisofficial.github.io/ShikiAkri/report.html">Сообщить о проблеме</a></li>
+                        <li><a href="https://akrifisofficial.github.io/ShikiAkri/created.html">Разработчики</a></li>
+                        <li><a href="https://akrifisofficial.github.io/ShikiAkri/donate.html">Пожертвования</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 ShikiAkri - Все права защищены. Этот сайт является фан-проектом.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+   mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section-title, .feature-card, .stat-item, .step').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
